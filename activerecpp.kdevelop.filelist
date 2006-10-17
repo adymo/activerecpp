@@ -1,0 +1,13 @@
+# KDevelop Custom Project File List
+CMakeLists.txt
+example/example.cpp
+lib/resource.cpp
+lib/resource.h
+lib/object.h
+lib/object.cpp
+lib/http.cpp
+lib/http.h
+lib/xmlparser.cpp
+lib/xmlparser.h
+lib/DOMPrintErrorHandler.cpp
+test/test_resource.cpp
