@@ -1,0 +1,32 @@
+Active ReC++
+
+The C++ version of ActiveResource library.
+
+Dependencies:
+    CMake: www.cmake.org                        (the best buildsystem I've ever heard about!)
+    libcurl: http://curl.haxx.se/libcurl/       (we need http requests)
+    Boost: http://www.boost.org/                (boost is just plain cool, everyone should use it ;))
+    Xerces-C++: http://xml.apache.org/xerces-c/ (too complicated, but in c++)
+
+    =all these libraries should be the part of the Linux distribution already
+    =compilation on other systems is not yet tested
+
+to build:
+    (from recppful source directory)
+    mkdir recppful_build
+    cd recppful_build
+    cmake ..
+    make
+
+to run tests and examples:
+    unpack Rails application from restful.tar.bz2
+    run rake rails:edge:freeze in restful top directory to get rails v1.2 (edge)
+    create database (postgres): createdb restful_development
+    run rake db:migrate
+    run script/server
+    run example/example from the build directory
+
+TODO:
+- authentication
+- HTTP PUT, POST, DELETE
+- type conversions
