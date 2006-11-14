@@ -71,9 +71,14 @@ void Http::put(const string &url, const string &data)
         curl_easy_setopt(curl, CURLOPT_READFUNCTION, Http::readData);
         curl_easy_setopt(curl, CURLOPT_READDATA, &data);
         curl_easy_setopt(curl, CURLOPT_INFILESIZE, data.size());
+        //setting content type to xml
+        curl_slist *headers = 0;
+        headers = curl_slist_append(headers, "Content-Type: application/xml");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         //performing the request
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
+        curl_slist_free_all(headers);
         if (res != CURLE_OK)
             throw PutException();
     }
