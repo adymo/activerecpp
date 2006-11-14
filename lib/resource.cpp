@@ -24,6 +24,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <iostream>
 #include <boost/format.hpp>
+#include <boost/algorithm/string/case_conv.hpp>
 
 #include "restful_locale.h"
 #include "http.h"
@@ -90,7 +91,8 @@ string Resource::attribute(const string &name) const
 
 void Resource::setAttribute(const string &name, const string &value)
 {
-    string s = str(boost::format("<%1%><%2%>%3%</%2%></%1%>") % resourceName() % name % value);
+    string s = str(boost::format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><%1%><%2%>%3%</%2%></%1%>")
+        % boost::algorithm::to_lower_copy(resourceName()) % name % value);
     try {
         Http::put(resourceUrl(), s);
         reload();

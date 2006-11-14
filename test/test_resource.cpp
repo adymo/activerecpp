@@ -61,6 +61,9 @@ struct resource_test {
     void test_get_attribute()
     {
         BOOST_CHECK_EQUAL(book->attribute("title"), "PickAxe");
+        book->setAttribute("title", "Rails Agile");
+        book->reload();
+        BOOST_CHECK_EQUAL(book->attribute("title"), "Rails Agile");
     }
 
     void test_error_policy()

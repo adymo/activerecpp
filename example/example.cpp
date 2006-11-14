@@ -50,10 +50,13 @@ int main(int argc, char **argv)
     cout << "Title: " << book->attribute("title") << endl;
 
     //change the title of the book
-    book->setAttribute("title", "Agile Web Development with Rails");
+    book->setAttribute("title", "Rails Agile");
 
     book->reload();
     cout << "New title: " << book->attribute("title") << endl;
+
+    //change the book title back
+    book->setAttribute("title", "PickAxe");
 
     delete book;
     return 0;
