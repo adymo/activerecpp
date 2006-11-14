@@ -11,3 +11,4 @@ lib/xmlparser.cpp
 lib/xmlparser.h
 lib/DOMPrintErrorHandler.cpp
 test/test_resource.cpp
+lib/locale.h
