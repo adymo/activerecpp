@@ -22,8 +22,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 #include "resource.h"
 
+#include <iostream>
 #include <boost/format.hpp>
 
+#include "restful_locale.h"
 #include "http.h"
 #include "xmlparser.h"
 
@@ -31,8 +33,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Restful {
 
-Resource::Resource()
-    :m_id(-1), m_data(NO_DATA)
+Resource::Resource(ErrorPolicy errorPolicy)
+    :m_errorPolicy(errorPolicy), m_id(-1), m_data(NO_DATA)
 {
 }
 
@@ -47,6 +49,8 @@ void Resource::setId(int id)
         m_data = Http::get(resourceUrl());
     } catch (Http::GetException) {
         m_data = NO_DATA;
+        if (m_errorPolicy == Report)
+            throw ResouceInvalidException(_("Can not fetch resource from the service."));
     }
 }
 
@@ -87,7 +91,15 @@ string Resource::attribute(const string &name) const
 void Resource::setAttribute(const string &name, const string &value)
 {
     string s = str(boost::format("<%1%><%2%>%3%</%2%></%1%>") % resourceName() % name % value);
-    Http::put(resourceUrl(), s);
+    try {
+        Http::put(resourceUrl(), s);
+        reload();
+    } catch (Http::PutException) {
+        //do nothing here, the object representation did not change
+        //just report error if necessary
+        if (m_errorPolicy == Report)
+            throw ResourceUpdateException(_("Service did not allow to update resource."));
+    }
 }
 
 }
