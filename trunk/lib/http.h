@@ -44,11 +44,12 @@ public:
     class DeleteException {};
 
     /**Executes HTTP GET to the @p url and returns the textual
-    representation of the result.*/
-    static string get(const string &url)
-        throw(GetException, PutException, PostException, DeleteException);
+    representation of the result.@n
+    Throws GetException if HTTP GET was unsuccessful.*/
+    static string get(const string &url);
 
-    /**Executes HTTP PUT to the @p url with given @p data.*/
+    /**Executes HTTP PUT to the @p url with given @p data.@n
+    Throws PutException if HTTP PUT was unsuccessful.*/
     static void put(const string &url, const string &data);
 
 private:
