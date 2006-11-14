@@ -1,8 +1,8 @@
 <?xml version = '1.0'?>
 <kdevelop>
   <general>
-    <author/>
-    <email/>
+    <author></author>
+    <email></email>
     <version>$VERSION$</version>
     <projectmanagement>KDevCustomProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
@@ -12,16 +12,16 @@
     <secondaryLanguages>
       <language>C</language>
     </secondaryLanguages>
-    <description/>
-    <defaultencoding/>
+    <description></description>
+    <defaultencoding></defaultencoding>
   </general>
   <kdevcustomproject>
     <filelistdirectory>/home/gremlin/projects/commercial/pluron/activerecpp</filelistdirectory>
     <run>
-      <mainprogram>/home/gremlin/projects/commercial/pluron/activerecpp/example/example</mainprogram>
-      <directoryradio>custom</directoryradio>
+      <mainprogram>example/example</mainprogram>
+      <directoryradio>build</directoryradio>
       <customdirectory>/</customdirectory>
-      <programargs/>
+      <programargs></programargs>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
@@ -36,14 +36,14 @@
       <abortonerror>false</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin/>
+      <makebin></makebin>
       <selectedenvironment>default</selectedenvironment>
       <environments>
         <default/>
       </environments>
       <prio>0</prio>
-      <defaulttarget/>
-      <makeoptions/>
+      <defaulttarget></defaulttarget>
+      <makeoptions></makeoptions>
     </make>
   </kdevcustomproject>
   <kdevfilecreate>
@@ -108,7 +108,7 @@
       <designerintegration>EmbeddedKDevDesigner</designerintegration>
     </qt>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -137,12 +137,12 @@
   </kdevfileview>
   <kdevdebugger>
     <general>
-      <programargs/>
-      <gdbpath/>
-      <dbgshell/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
+      <dbgshell></dbgshell>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
