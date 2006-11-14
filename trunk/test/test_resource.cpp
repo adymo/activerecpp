@@ -23,6 +23,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include <iostream>
+
 #include <resource.h>
 
 using boost::unit_test::test_suite;
@@ -39,6 +41,17 @@ public:
     virtual string password() const { return "pass"; }
 };
 
+class BadBook: public Resource {
+public:
+    BadBook() :Resource(Resource::Report) {}
+
+    virtual string resourceName() const { return "Book"; }
+    //wrong url here
+    virtual string url() const { return "http://localhost:5000/books"; }
+    virtual string username() const { return "adymo"; }
+    virtual string password() const { return "pass"; }
+};
+
 struct resource_test {
     resource_test()
     {
@@ -48,6 +61,17 @@ struct resource_test {
     void test_get_attribute()
     {
         BOOST_CHECK_EQUAL(book->attribute("title"), "PickAxe");
+    }
+
+    void test_error_policy()
+    {
+        int r = 0;
+        try {
+        BadBook *book = BadBook::find<BadBook>(30000);
+        } catch (Resource::ResouceInvalidException) {
+            r = 1;
+        }
+        BOOST_CHECK_EQUAL(r, 1);
     }
 
     Book *book;
@@ -61,8 +85,11 @@ struct resource_test_suite: public test_suite {
 
         test_case *get_attribute_test_case =
             BOOST_CLASS_TEST_CASE(&resource_test::test_get_attribute, instance);
+        test_case *error_policy_test_case =
+            BOOST_CLASS_TEST_CASE(&resource_test::test_error_policy, instance);
 
         add(get_attribute_test_case, 1);
+        add(error_policy_test_case, 1);
     }
 };
 

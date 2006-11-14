@@ -44,10 +44,37 @@ or use @ref Resource::save to assign the id to the newly created object.
 */
 class Resource {
 public:
+
+    /** @short Generic resource exception with a message.*/
+    class ResourceException {
+    public:
+        ResourceException(const string &message): m_message(message) {}
+        /**Returns a message string.*/
+        const string &message() const { return m_message; }
+    private:
+        string m_message;
+    };
+    /** @short "Resource is invalid" exception.*/
+    class ResouceInvalidException: public ResourceException {
+    public:
+        ResouceInvalidException(const string &message): ResourceException(message) {}
+    };
+    /** @short "Resource can not be updated" exception.*/
+    class ResourceUpdateException: public ResourceException {
+    public:
+        ResourceUpdateException(const string &message): ResourceException(message) {}
+    };
+
+    /**There're two policies for error reporting:*/
+    enum ErrorPolicy {
+        Silent, /**<Does not report errors, but gives guarantee that the resource is always in a valid state*/
+        Report  /**<Reports errors by raising exceptions. Also provides valid state guarantee.*/
+    };
+
     /**Constructs the resource. Please note that all descendants should provide
     the constructor without arguments because @ref Resource::find uses them to
     create new resource objects.*/
-    Resource();
+    Resource(ErrorPolicy errorPolicy = Resource::Silent);
     virtual ~Resource();
 
     /**Finds the resource by id and returns it. This function assumes that
@@ -60,8 +87,15 @@ public:
         return resource;
     }
 
+    /**@return the string value of the attribute @p name.*/
     string attribute(const string &name) const;
+    /**Sets the string @p value of the attribute @p name.*/
     void setAttribute(const string &name, const string &value);
+
+    /**@return the current error policy.*/
+    ErrorPolicy errorPolicy() const { return m_errorPolicy; }
+    /**Sets the current error policy.*/
+    void setErrorPolicy(ErrorPolicy policy) { m_errorPolicy = policy; }
 
     /**Reimplement to return the resource name.*/
     virtual string resourceName() const = 0;
@@ -88,6 +122,7 @@ private:
     /** @return resource url (with id and .xml extension added).*/
     string resourceUrl() const;
 
+    ErrorPolicy m_errorPolicy;
     int m_id;
     string m_data;
 };
