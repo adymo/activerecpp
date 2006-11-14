@@ -27,7 +27,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 namespace Restful {
 
 string Http::get(const string &url)
-    throw(GetException, PutException, PostException, DeleteException)
 {
     string buffer;
     CURL *curl;
