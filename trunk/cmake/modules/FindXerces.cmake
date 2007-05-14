@@ -6,11 +6,9 @@
 #  XERCES_LIBRARIES
 #  XERCES_FOUND
 
-find_path(XERCES_INCLUDE_DIR version.hpp
+find_path(XERCES_INCLUDE_DIR xercesc/util/XercesDefs.hpp
     /usr/local/include
     /usr/include
-    /usr/include/boost
-    /usr/local/include/boost
 )
 
 find_library(XERCES_LIBRARIES
