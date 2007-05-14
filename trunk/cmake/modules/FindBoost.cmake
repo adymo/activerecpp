@@ -10,7 +10,7 @@
 #  BOOST_LIBRARIES
 #  BOOST_FOUND
 
-find_path(BOOST_INCLUDE_DIR version.hpp
+find_path(BOOST_INCLUDE_DIR boost/version.hpp
     /usr/local/include
     /usr/include
     /usr/include/boost
